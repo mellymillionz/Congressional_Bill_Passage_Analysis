@@ -1,81 +1,87 @@
-# Congressional_Bill_Analysis
-Analysis and predictions on Congressional bill passage
+# Analysis and Predictions of Congressional Bill Passage in the House of Representatives
 
-# Sittin’ Here on Capital Hill: Investigation of Congressional Bill Data
+# Overview:  
+This project used Congressional bill data from 110th to 114th Congresses (2011-2017) as the dataset for a binary classification project focusing on prediction of the minority class (Passed Bills). The dataset consisted of 51,067 bills (resolutions and join resolutions were excluded), of which less than 12% passed the House. The data contained  metafeatures about the bill itself (ie. passage date, introduction date), the proposing congressperson (ie. state, party, name), the Congress at the time of proposal (iw. Congress number, majority), and  text features (title, bill summary). The data spanned two Democratic majority congresses, two split congresses, and ended with a Republican majority congress.
 
-## Question: Predicting what bills will pass
-- What makes a passable bill?
-- Are there particular types of bills that are more likely to pass (topics)? Ones that never pass?
-
-## Dependent Variable: Pass or not pass
-
-- Second Dependent Variable: Law or not law
-
-Features:
-
-- Text analysis on bill summary content using topic modeling: https://www.congress.gov/bill/93rd-congress/house-bill/1?s=3&r=1
-
-Increase domain knowledge on bill types:
-https://govtracknews.wordpress.com/2009/11/11/what-are-the-different-types-of-bills/
-
-## Further investigations: 
-
-- When were the most bills passed? The least?
-- How actually important is house majority?
-- Predict Republican or Democrat proposed based on content
-
-## Why this matters: 
-
-- Which types of bills pass and why: text analysis is a big part of it!
-- Provides a snapshot of how our democracy is working 
-- Investigates how bill passage has changed over time.
-
-## Dataset:
+The text features were used for topic modeling using natural language processing, and those topics were included as a feature in the final classification model.
 
 Full dataset:
-https://www.congress.gov/about/data
-http://www.congressionalbills.org/download.html
 
-Documentation: https://github.com/usgpo/bill-status/blob/master/BILLSTATUS-XML_User_User-Guide.md
+Webscrape summaries: https://www.congress.gov/about/data
 
-## Modeling:
+API call: http://www.congressionalbills.org
 
-- Topic modeling on summaries and titles
-- Tokenize
-- IFIDF or Countvectorizer
-- LDA 
-- Word Clouds for each Congress
-Classification algorithm:
-- Naive Bayes
-- Logistic Regression
-- Random Forest
+![Image description](link-to-image)
 
-Evaluations: 
-- AUC/ROC
-- Accuracy, F1, Precision, Recall
-- Focus on Recall because only care about correct classification of PASS
+## Natural Language Processing:
+Webscraped bill summaries were first parsed using Beautiful Soup and stored in MySQL.
 
-Modeling resource: https://www.analyticsvidhya.com/blog/2018/04/a-comprehensive-guide-to-understand-and-implement-text-classification-in-python/
+Initial text exploratory analysis included word clouds for Passed and Not Passed Bills, as well as for each congress.
+
+A custom Spacy tokenizer was used to process the text features (title and summary). Punctuations were removed and words were lemmatized, most parts of speech were preserved as bills contain few adjectives and proper nouns were deemed important to bill comprehension and topics. Included in the tokenizer were custom stopwords that appeared in more than 90% of the corpus (such as 'bill', or 'amend'), and limited to 10,000 words. The tokenizer was passed into the CountVectorizer before topic modeling.
+
+## Topic Modeling: 
+Processed summaries were then used for topic modeling using Latent Dirichlet Allocation. Optimal parameters were tested first using a wide spread in Gridsearch, particularly with n-components (the actual number of topics). Human review was used once the number of topics had been narrowed between 10-15, with 13 topcis being optimal for human topic comprehension.
+
+Final topics were also evaluated using Log Likelihood and Perplexity, but overall these had little effect on the actual parameters chosen.
+
+Topics were explored using pyLDAvis:
+
+Topics were also explored using PCA and t-sne.
+
+## Exploratory Analysis of Non-text features:
+Topics were added back into the non-text metafeatures and used for further exploratory analysis. 
+
+Several features in the original dataset were removed to prevent data leakage, and the final dataset included 17 features. Categorical features were one-hot-encoded and numeric features were scaled. All were added into a columntransformer and pipeline for model testing.
+
+Passed bills by topic and congress:
 
 ## Visualizations:
-- What state reps intro/pass the most bills heat map us states
-- Bills passed over the years (or at least by each Congress) stacked bar graph
-- Bills introduced by men vs women
-- Bills introduced by Dem vs Rep
-- Who introduces the mos Bills (names)
+- State bill passage:
+- Bills passage by Congress:
+- Bills introduced by gender of congressperson.
+- Bills introduced by party of congressperson.
+- Who introduces the most Bills (names)
 - Passes during Majority vs non-majority
 - Number of cosponsors/bill type or bill passage
 - Bill topics that get vetoed!
 - Time passed between bill introduction and law
 
-## Questions:
-- How best to deal with class imbalance (this is a dataset similar to disease detection and fraud detection - small amount of 1’s in a sea of 0’s)
-- Run on all bills in all congresses? Just the last 3? Last 1?
-- If I do both from question above is there a a good way to compare them?
+## Modeling:
 
-## Other Resources:
+Four models were tested, including Naive Bayes for baseline comparison. Hyperparameter tuning focused on optimising for recall and balancing the major class imbalance between passed and not passed bills. All models were chosen because they allowed for weighting to counter the class imbalance.
 
-Using Neural Networks to understand Congress
-https://medium.com/fiscalnote-in-depth/how-we-used-neural-networks-to-understand-congress-c6aec3069594
-Specific Bill info
-https://www.congress.gov/bill/116th-congress/house-resolution/739/related-bills
+Classification models:
+- Naive Bayes
+- Logistic Regression
+- Stochastic Gradient Descent (with log)
+- Random Forest
+
+Evaluation Metrics: 
+- AUC/ROC
+- Accuracy, F1, Precision, Recall
+
+Final Model: Logistic Regression, which performed best for recall of the minority class.
+
+## Why this project matters: 
+Which bills pass and why is something that should be important to all Americans - it is a reflfection of how our democracy operates. Additionally, it's directly relevant to the jobs of lobbyists and congresspersons alike. Thus, the feature importances are highly important for this project. Overall, the project provides a snapshot of how our democracy functions at the federal level, across different types of majority congresses in the modern era. 
+
+Which types of bills pass:
+- Harmonized Tariff Schedule and desgination related bills
+- Bills proposed by US territories
+- Bill title length
+- More cosponors
+- Bills from small states that have proportionall high passage rates.
+- Bills from congresspersons in high population districts in big 3 states (CA,TX,NY)
+
+## Limitations: 
+
+The largest limitations were the class imbalance issue, concern over data leakage, and slow webscraping which resulted in less overall data to work with.
+
+## Next Steps:
+
+Information on more congresses for comparison analysis over time: Online records go back to the 93rd Congress, in 1973. It would be interesting do EDA on all online congressional data and see how they change over time.
+
+Stacked Modeling: Models for meta-features combined with text data could mean great outcomes with the inclusion of stacking techniques.
+
+Introducing more features: Continue this analysis by including data regarding the number of times a bill is introduced before it passed.
