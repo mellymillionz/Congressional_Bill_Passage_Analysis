@@ -43,8 +43,7 @@ Several features in the original dataset were removed to prevent data leakage, a
 
 Passed bills by topic and congress:
 
-![Passed bills by topic and Congress](https://github.com/mellymillionz/Congressional_Bill_Passage_Analysis/blob/master/Visualizations/t-sne_topics.png)
-
+![Passed bills by topic and Congress](https://github.com/mellymillionz/Congressional_Bill_Passage_Analysis/blob/master/Visualizations/topic_by_congress_passed.png)
 
 
 ## Visualizations:
@@ -83,7 +82,9 @@ Evaluation Metrics:
 
 
 ## Why this project matters: 
-Which bills pass and why is something that should be important to all Americans - it is a reflfection of how our democracy operates. Additionally, it's directly relevant to the jobs of lobbyists and congresspersons alike. Thus, the feature importances are highly important for this project. Overall, the project provides a snapshot of how our democracy functions at the federal level, across different types of majority congresses in the modern era. 
+Which bills pass and why is something that should be important to all Americans - it is a reflfection of how our democracy operates and it is directly relevant to the jobs of lobbyists and congresspersons alike. Overall, the project provides a snapshot of how our democracy functions at the federal level, across different types of majority congresses in the modern era. 
+
+Examining the feature importances for logistic regression:
 
 **Which types of bills pass**:
 - Harmonized Tariff Schedule and desgination related bills
