@@ -1,6 +1,6 @@
 # Analysis and Predictions of Congressional Bill Passage in the House of Representatives
 
-# Overview:  
+## Overview:  
 This project used Congressional bill data from 110th to 114th Congresses (2011-2017) as the dataset for a binary classification project focusing on prediction of the minority class (Passed Bills). The dataset consisted of 51,067 bills (resolutions and join resolutions were excluded), of which less than 12% passed the House. 
 
 ![Class Imbalance - Bill Passage](https://github.com/mellymillionz/Congressional_Bill_Passage_Analysis/blob/master/Visualizations/Bill_Split_2.png)
@@ -9,18 +9,18 @@ The data contained metafeatures about the bill itself (ie. passage date, introdu
 
 The **text features** were used for topic modeling using natural language processing, and those topics were included as a feature in the final classification model.
 
-**Full dataset**:
-
-**Webscrape summaries**: https://www.congress.gov/about/data
+## Dataset:
 
 **API call**: http://www.congressionalbills.org
 
-## Natural Language Processing:
+**Webscrape Summaries**: https://www.congress.gov/about/data
 Webscraped bill summaries were first parsed using Beautiful Soup and stored in MySQL.
 
-Initial text exploratory analysis included word clouds for Passed and Not Passed Bills, as well as for each congress.
+## Natural Language Processing:
 
 ![Passed Bills Wordcloud](https://github.com/mellymillionz/Congressional_Bill_Passage_Analysis/blob/master/Visualizations/passed_wordcloud.png)
+
+Initial text exploratory analysis included word clouds for Passed and Not Passed Bills, as well as for each congress.
 
 A custom **Spacy tokenizer** was used to process the text features (title and summary). Punctuations were removed and words were lemmatized, most parts of speech were preserved as bills contain few adjectives and proper nouns were deemed important to bill comprehension and topics. Included in the tokenizer were custom stopwords that appeared in more than 90% of the corpus (such as 'bill', or 'amend'), and limited to 10,000 words. The tokenizer was passed into a CountVectorizer before topic modeling.
 
