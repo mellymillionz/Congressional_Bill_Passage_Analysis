@@ -43,6 +43,10 @@ Several features in the original dataset were removed to prevent data leakage, a
 
 Passed bills by topic and congress:
 
+![Passed bills by topic and Congress](https://github.com/mellymillionz/Congressional_Bill_Passage_Analysis/blob/master/Visualizations/t-sne_topics.png)
+
+
+
 ## Visualizations:
 
 Exploratory analysis was done on many of the metafeatures, including:
@@ -55,7 +59,7 @@ Exploratory analysis was done on many of the metafeatures, including:
 - Bill topics that get vetoed
 - Time passed between bill introduction and law
 
-![Proportional State Bill Passage:](https://github.com/mellymillionz/Congressional_Bill_Passage_Analysis/blob/master/Visualizations/state_bill_passage.png)
+![Proportional State Bill Passage:](https://github.com/mellymillionz/Congressional_Bill_Passage_Analysis/blob/master/Visualizations/topic_by_congress_passed.png)
 
 ## Modeling:
 
