@@ -14,6 +14,7 @@ The **text features** were used for topic modeling using natural language proces
 **API call**: http://www.congressionalbills.org
 
 **Webscrape Summaries**: https://www.congress.gov/about/data
+
 Webscraped bill summaries were first parsed using Beautiful Soup and stored in MySQL.
 
 ## Natural Language Processing:
@@ -67,7 +68,7 @@ Four models were tested, including Naive Bayes for baseline comparison. Hyperpar
 Classification models:
 - Naive Bayes
 - Logistic Regression
-- Stochastic Gradient Descent (with log)
+- Stochastic Gradient Descent (log)
 - Random Forest
 
 Evaluation Metrics: 
@@ -80,6 +81,7 @@ Evaluation Metrics:
 
 ![ROC/AUC for Final Model](https://github.com/mellymillionz/Congressional_Bill_Passage_Analysis/blob/master/Visualizations/ROC_Logreg.png)
 
+In this case, because recall was the focus rather than a combination of precision and recall, the ROC curve unfortunately tells us a little about the actual evaulation of the model for the purposes of this project.
 
 ## Why this project matters: 
 Which bills pass and why is something that should be important to all Americans - it is a reflfection of how our democracy operates and it is directly relevant to the jobs of lobbyists and congresspersons alike. Overall, the project provides a snapshot of how our democracy functions at the federal level, across different types of majority congresses in the modern era. 
