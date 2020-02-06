@@ -1,17 +1,19 @@
 # Analysis and Predictions of Congressional Bill Passage in the House of Representatives
 
 # Overview:  
-This project used Congressional bill data from 110th to 114th Congresses (2011-2017) as the dataset for a binary classification project focusing on prediction of the minority class (Passed Bills). The dataset consisted of 51,067 bills (resolutions and join resolutions were excluded), of which less than 12% passed the House. The data contained  metafeatures about the bill itself (ie. passage date, introduction date), the proposing congressperson (ie. state, party, name), the Congress at the time of proposal (iw. Congress number, majority), and  text features (title, bill summary). The data spanned two Democratic majority congresses, two split congresses, and ended with a Republican majority congress.
+This project used Congressional bill data from 110th to 114th Congresses (2011-2017) as the dataset for a binary classification project focusing on prediction of the minority class (Passed Bills). The dataset consisted of 51,067 bills (resolutions and join resolutions were excluded), of which less than 12% passed the House. 
 
-The text features were used for topic modeling using natural language processing, and those topics were included as a feature in the final classification model.
+![Class Imbalance - Bill Passage](https://github.com/mellymillionz/Congressional_Bill_Passage_Analysis/blob/master/Visualizations/Bill_Split_2.png)
+
+The data contained metafeatures about the bill itself (ie. passage date, introduction date), the proposing congressperson (ie. state, party, name), the Congress at the time of proposal (iw. Congress number, majority), and  text features (title, bill summary). The data spanned two Democratic majority congresses, two split congresses, and ended with a Republican majority congress.
+
+The **text features** were used for topic modeling using natural language processing, and those topics were included as a feature in the final classification model.
 
 **Full dataset**:
 
 **Webscrape summaries**: https://www.congress.gov/about/data
 
 **API call**: http://www.congressionalbills.org
-
-![Class Imbalance - Bill Passage](https://github.com/mellymillionz/Congressional_Bill_Passage_Analysis/blob/master/Visualizations/Bill_Split_2.png)
 
 ## Natural Language Processing:
 Webscraped bill summaries were first parsed using Beautiful Soup and stored in MySQL.
