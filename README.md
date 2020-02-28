@@ -59,7 +59,7 @@ Exploratory analysis was done on many of the metafeatures, including:
 - Bill topics that get vetoed
 - Time passed between bill introduction and law
 
-![Proportional State Bill Passage:](https://github.com/mellymillionz/Congressional_Bill_Passage_Analysis/blob/master/Visualizations/topic_by_congress_passed.png)
+![Proportional State Bill Passage:](Visualizations/state_bill_passage.png)
 
 ## Modeling:
 
